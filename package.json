@@ -1,5 +1,8 @@
 {
   "name": "@oktatas-ai/monorepo",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "workspaces": [
+    "apps/oktatas-ai-website"
+  ]
 }
