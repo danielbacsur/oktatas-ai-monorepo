@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Balancer } from "react-wrap-balancer";
 import { motion, AnimatePresence } from "framer-motion";
+import { signInWithGoogle } from "@/actions/auth";
 
 const problems = [
   "Problémáid vannak az algebrával?",
@@ -62,7 +63,10 @@ export default function LandingPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  <Button className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700">
+                  <Button
+                    className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
+                    onClick={() => signInWithGoogle()}
+                  >
                     Beszélj Sophieval!
                   </Button>
                 </motion.div>
@@ -126,7 +130,10 @@ export default function LandingPage() {
               </motion.div>
             </div>
             <div className="mt-12 text-center">
-              <Button className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700">
+              <Button
+                className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
+                onClick={() => signInWithGoogle()}
+              >
                 Próbáld ki te is!
               </Button>
             </div>
@@ -204,7 +211,10 @@ export default function LandingPage() {
               </motion.div>
             </div>
             <div className="mt-12 text-center">
-              <Button className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700">
+              <Button
+                className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
+                onClick={() => signInWithGoogle()}
+              >
                 Kezdj Tanulni Sophieval!
               </Button>
             </div>
