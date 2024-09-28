@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Balancer } from "react-wrap-balancer";
 import { motion, AnimatePresence } from "framer-motion";
 import { signInWithGoogle } from "@/actions/auth";
+import { useSession } from "next-auth/react";
 
 const problems = [
   "Problémáid vannak az algebrával?",
@@ -28,6 +29,9 @@ export default function LandingPage() {
     return () => clearInterval(interval);
   }, []);
 
+  const session = useSession();
+  const firstName = session.data?.user?.name?.split(" ")[0];
+
   return (
     <>
       <main>
@@ -39,13 +43,21 @@ export default function LandingPage() {
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="flex-1 md:pr-8 mb-8 md:mb-0">
                 <motion.h1
-                  className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-900 text-center md:text-left leading-tight"
+                  className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-900 text-center md:text-left !leading-tight"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  Ismerd meg Sophiet,
-                  <br />A Virtuális Tanárodat
+                  {firstName ? (
+                    <>
+                      Üdvözöllek {firstName}! <br />
+                      Alig várom, hogy együtt tanuljunk! 📚
+                    </>
+                  ) : (
+                    <>
+                      Ismerd meg Sophiet, <br />A Virtuális Tanárodat
+                    </>
+                  )}
                 </motion.h1>
                 <motion.p
                   className="mt-8 text-gray-800 text-center md:text-left leading-relaxed"
@@ -53,23 +65,34 @@ export default function LandingPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  Sophie egy AI alapú virtuális magántanár, aki a magyar
-                  követelményeknek megfelelően képes 20 perces személyre szabott
-                  tanórákat tartani.
+                  {firstName ? (
+                    <>
+                      Felkerültél a várólistára! Hamarosan értesíteni fogunk,
+                      amint publikusan is elérhetővé válik oktatási platformunk.
+                    </>
+                  ) : (
+                    <>
+                      Sophie egy AI alapú virtuális magántanár, aki a magyar
+                      követelményeknek megfelelően képes 20 perces személyre
+                      szabott tanórákat tartani.
+                    </>
+                  )}
                 </motion.p>
-                <motion.div
-                  className="mt-8 text-center md:text-left"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <Button
-                    className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
-                    onClick={() => signInWithGoogle()}
+                {!firstName && (
+                  <motion.div
+                    className="mt-8 text-center md:text-left"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
                   >
-                    Beszélj Sophieval!
-                  </Button>
-                </motion.div>
+                    <Button
+                      className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
+                      onClick={() => signInWithGoogle()}
+                    >
+                      Beszélj Sophieval!
+                    </Button>
+                  </motion.div>
+                )}
               </div>
               <div className="flex-1 h-80 md:h-[32rem] lg:h-[70dvh]">
                 <motion.img
@@ -129,18 +152,20 @@ export default function LandingPage() {
                 <p className="text-lg text-gray-800">Elérhetőség</p>
               </motion.div>
             </div>
-            <div className="mt-12 text-center">
-              <Button
-                className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
-                onClick={() => signInWithGoogle()}
-              >
-                Próbáld ki te is!
-              </Button>
-            </div>
+            {!firstName && (
+              <div className="mt-12 text-center">
+                <Button
+                  className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
+                  onClick={() => signInWithGoogle()}
+                >
+                  Próbáld ki te is!
+                </Button>
+              </div>
+            )}
           </div>
         </section>
 
-        <section className="bg-gradient-to-r from-gray-100 to-gray-200 py-16 md:py-20">
+        <section className="bg-gradient-to-t from-gray-100 to-gray-200 py-16 md:py-20">
           <div className="container max-w-4xl mx-auto px-6 text-center">
             <AnimatePresence mode="wait">
               <motion.h2
@@ -210,14 +235,16 @@ export default function LandingPage() {
                 </p>
               </motion.div>
             </div>
-            <div className="mt-12 text-center">
-              <Button
-                className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
-                onClick={() => signInWithGoogle()}
-              >
-                Kezdj Tanulni Sophieval!
-              </Button>
-            </div>
+            {!firstName && (
+              <div className="mt-12 text-center">
+                <Button
+                  className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
+                  onClick={() => signInWithGoogle()}
+                >
+                  Kezdj Tanulni Sophieval!
+                </Button>
+              </div>
+            )}
           </div>
         </section>
       </main>
