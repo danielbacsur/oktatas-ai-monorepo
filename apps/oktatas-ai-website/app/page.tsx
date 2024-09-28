@@ -89,7 +89,7 @@ export default function LandingPage() {
                       className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
                       onClick={() => signInWithGoogle()}
                     >
-                      Beszélj Sophieval!
+                      Beszélj Sophieval
                     </Button>
                   </motion.div>
                 )}
@@ -158,7 +158,7 @@ export default function LandingPage() {
                   className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
                   onClick={() => signInWithGoogle()}
                 >
-                  Próbáld ki te is!
+                  Próbáld ki te is
                 </Button>
               </div>
             )}
@@ -241,7 +241,7 @@ export default function LandingPage() {
                   className="px-8 md:px-10 py-4 md:py-5 font-semibold rounded-full bg-indigo-600 text-white hover:bg-indigo-700"
                   onClick={() => signInWithGoogle()}
                 >
-                  Kezdj Tanulni Sophieval!
+                  Kezdj Tanulni Sophieval
                 </Button>
               </div>
             )}
